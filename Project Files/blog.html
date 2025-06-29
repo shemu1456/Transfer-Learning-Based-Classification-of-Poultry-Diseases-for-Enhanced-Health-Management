@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoultryDetect - Blog</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.ico') }}">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #5cb874; /* Green hover for navigation */
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #5cb874;
+        }
+        main {
+            flex-grow: 1;
+            padding: 50px 20px;
+            max-width: 960px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .blog-post-summary {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .blog-post-summary img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .blog-post-content {
+            flex-grow: 1;
+        }
+        .blog-post-content h2 {
+            font-size: 28px;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .blog-post-content p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .read-more-btn {
+            display: inline-block;
+            background-color: #5cb874;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background-color 0.3s ease;
+        }
+        .read-more-btn:hover {
+            background-color: #4CAF50;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 14px;
+            color: #aaa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}" class="logo">PoultryDetect</a>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">HOME</a></li>
+                <li><a href="{{ url_for('blog_page') }}">BLOG</a></li>
+                <li><a href="{{ url_for('portfolio_page') }}">PORTFOLIO</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Our Blog</h1>
+
+        <div class="blog-post-summary">
+            <img src="{{ url_for('static', filename='assets/img/blog-thumb1.jpg') }}" alt="Blog Post 1 Thumbnail">
+            <div class="blog-post-content">
+                <h2>Understanding Common Poultry Diseases</h2>
+                <p>Learn about the most prevalent diseases affecting poultry, their symptoms, and early detection methods. Timely identification is key to preventing outbreaks and ensuring flock health...</p>
+                <a href="{{ url_for('blog_single_page') }}" class="read-more-btn">Read More</a>
+            </div>
+        </div>
+
+        <div class="blog-post-summary">
+            <img src="{{ url_for('static', filename='assets/img/blog-thumb2.jpg') }}" alt="Blog Post 2 Thumbnail">
+            <div class="blog-post-content">
+                <h2>Preventative Measures for a Healthy Flock</h2>
+                <p>Discover best practices for biosecurity, vaccination schedules, and nutritional tips to keep your poultry healthy and productive. Prevention is always better than cure...</p>
+                <a href="{{ url_for('blog_single_page') }}" class="read-more-btn">Read More</a>
+            </div>
+        </div>
+
+        <div class="blog-post-summary">
+            <img src="{{ url_for('static', filename='assets/img/blog-thumb3.jpg') }}" alt="Blog Post 3 Thumbnail">
+            <div class="blog-post-content">
+                <h2>The Role of AI in Poultry Disease Detection</h2>
+                <p>Explore how artificial intelligence and machine learning are revolutionizing poultry farming, enabling faster and more accurate disease diagnosis. Our PoultryDetect app is leading the way...</p>
+                <a href="{{ url_for('blog_single_page') }}" class="read-more-btn">Read More</a>
+            </div>
+        </div>
+
+        </main>
+
+    <footer>
+        &copy; 2025 PoultryDetect. All rights reserved.
+    </footer>
+</body>
+</html>
