@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoultryDetect - Single Blog Post</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.ico') }}">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #5cb874; /* Green hover for navigation */
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #5cb874;
+        }
+        main {
+            flex-grow: 1;
+            padding: 50px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .blog-meta {
+            text-align: center;
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 30px;
+        }
+        .blog-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .blog-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        .blog-content ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+        }
+        .blog-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 14px;
+            color: #aaa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}" class="logo">PoultryDetect</a>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">HOME</a></li>
+                <li><a href="{{ url_for('blog_page') }}">BLOG</a></li>
+                <li><a href="{{ url_for('portfolio_page') }}">PORTFOLIO</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </header>
+
+    <main>
+        <h1>Understanding Common Poultry Diseases</h1>
+        <div class="blog-meta">
+            Posted on June 27, 2025 by Admin
+        </div>
+
+        <div class="blog-content">
+            <img src="{{ url_for('static', filename='assets/img/single-blog-hero.jpg') }}" alt="Poultry Disease Research">
+            <p>
+                Poultry farming is a vital agricultural sector, but it's constantly challenged by various diseases that can lead to significant economic losses. Early detection and proactive management are crucial for maintaining a healthy flock and ensuring sustainable production.
+            </p>
+            <p>
+                Some of the most common poultry diseases include:
+            </p>
+            <ul>
+                <li><strong>Coccidiosis:</strong> A parasitic disease caused by protozoa that infect the intestinal tract, leading to diarrhea, weight loss, and mortality.</li>
+                <li><strong>Newcastle Disease:</strong> A highly contagious viral disease affecting respiratory, nervous, and digestive systems. It can cause severe illness and high death rates.</li>
+                <li><strong>Salmonellosis:</strong> A bacterial infection that can affect poultry and also be transmitted to humans. Symptoms in birds vary but can include diarrhea and reduced egg production.</li>
+                <li><strong>Avian Influenza (Bird Flu):</strong> A highly pathogenic viral disease that can spread rapidly and cause severe illness and death in poultry.</li>
+                <li><strong>Marek's Disease:</strong> A viral disease that causes tumors in various organs, including nerves and skin, leading to paralysis and immunosuppression.</li>
+            </ul>
+            <p>
+                Recognizing the symptoms of these diseases is the first step in effective management. Farmers should regularly monitor their birds for signs such as lethargy, ruffled feathers, reduced feed intake, respiratory distress, abnormal droppings, and swelling.
+            </p>
+            <p>
+                Our PoultryDetect application aims to assist farmers in this crucial task by providing an automated image classification tool to help identify poultry infections quickly, allowing for timely intervention and treatment.
+            </p>
+        </div>
+
+        <a href="{{ url_for('blog_page') }}" class="read-more-btn" style="display: block; width: fit-content; margin: 40px auto 0 auto;">Back to Blog</a>
+    </main>
+
+    <footer>
+        &copy; 2025 PoultryDetect. All rights reserved.
+    </footer>
+</body>
+</html>
