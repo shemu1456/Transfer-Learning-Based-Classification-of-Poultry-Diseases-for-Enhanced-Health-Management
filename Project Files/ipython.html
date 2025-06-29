@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PoultryDetect - Prediction</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/img/favicon.ico') }}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #000; /* Black background */
+            color: #fff; /* White text */
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 30px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        nav ul li a:hover {
+            color: #5cb874; /* Green hover for navigation */
+        }
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons a {
+            color: #fff;
+            font-size: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .social-icons a:hover {
+            color: #5cb874;
+        }
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+        }
+        h1 {
+            font-size: 48px;
+            margin-bottom: 30px;
+            line-height: 1.2;
+            max-width: 800px;
+        }
+        /* --- Prediction Section Styles --- */
+        .prediction-section {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #1a1a1a; /* Darker background for prediction box */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+        }
+        .prediction-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+        .prediction-section h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: #eee;
+        }
+        .file-upload-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .file-upload-form label {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .file-upload-form input[type="file"] {
+            padding: 10px;
+            border: 1px solid #5cb874; /* Green border */
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+            width: 80%;
+        }
+        .predict-btn {
+            background-color: #28a745; /* Green button */
+            color: #fff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .predict-btn:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        .prediction-results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #222;
+            border-radius: 8px;
+            border: 1px solid #5cb874;
+            display: {% if detected_label or message or uploaded_image %} block {% else %} none {% endif %}; /* Show if any result or message exists */
+        }
+        .prediction-results img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            border: 2px solid #5cb874;
+        }
+        .prediction-results p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
+        .prediction-results p strong {
+            color: #5cb874; /* Green for detected label */
+        }
+        .error-message {
+            color: #dc3545; /* Red for error messages */
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="{{ url_for('home') }}" class="logo">PoultryDetect</a>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">HOME</a></li>
+                <li><a href="{{ url_for('blog_page') }}">BLOG</a></li>
+                <li><a href="{{ url_for('portfolio_page') }}">PORTFOLIO</a></li>
+                <li><a href="#">CONTACT</a></li>
+            </ul>
+        </nav>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+    </header>
+
+    <main>
+        <div class="prediction-section">
+            <h2>Prediction</h2>
+            <h3>Image Classification</h3>
+            {% if message %}
+                <p class="error-message">{{ message }}</p>
+            {% endif %}
+            <form action="{{ url_for('predict_post_route') }}" method="POST" enctype="multipart/form-data" class="file-upload-form">
+                <label for="file">Upload Your Image :</label>
+                <input type="file" name="file" id="file" accept="image/*">
+                <button type="submit" class="predict-btn">predict</button>
+            </form>
+
+            <div class="prediction-results">
+                {% if uploaded_image %}
+                    <p>Uploaded Image:</p>
+                    <img src="{{ url_for('static', filename='uploads/' + uploaded_image) }}" alt="Uploaded Image">
+                {% endif %}
+
+                {# --- NEW: Display original image dimensions --- #}
+                {% if original_width and original_height and original_channels %}
+                    <p>Original Image Dimensions: <strong>{{ original_width }}x{{ original_height }}</strong> ({{ original_channels }} channels)</p>
+                    <p style="font-size: 14px; color: #ccc;">(Note: Image will be resized to 224x224 for prediction)</p>
+                {% endif %}
+
+                {% if detected_label %}
+                    <p>Hence, The infection type detected as <strong>{{ detected_label }}</strong></p>
+                    {% if confidence %}
+                        <p>Confidence: {{ confidence }}</p>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 PoultryDetect. All rights reserved.
+    </footer>
+</body>
+</html>
