@@ -1,0 +1,15 @@
+Flask
+tensorflow
+numpy
+Pillow
+Werkzeug
+keras-tuner
+tensorflow
+keras
+numpy
+pandas
+opencv-python
+matplotlib
+seaborn
+scikit-learn
+keras-tuner
